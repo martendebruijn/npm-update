@@ -23,7 +23,7 @@ pip install packaging
 
 ## Usage
 
-Run the script inside a project wiht a `package.json` in the root folder:
+Run the script inside a project with a `package.json` in the root folder:
 
 ```sh
 cd coding-project/my-awesome-project
