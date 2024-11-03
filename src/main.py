@@ -3,13 +3,13 @@ import json
 import subprocess
 from packaging import version
 
-pwd = os.getcwd()
+cwd = os.getcwd()
 
 
 # Load dependencies from package.json
 def load_dependencies():
     # Read package.json file
-    with open(f"{pwd}/package.json", "r") as f:
+    with open(f"{cwd}/package.json", "r") as f:
         package_data = json.load(f)
     # Extract dependencies from package.json
     dependencies = package_data.get("dependencies", {})
