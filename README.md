@@ -6,6 +6,8 @@ Update NPM dependencies
   - [Dependencies](#dependencies)
   - [Install](#install)
   - [Usage](#usage)
+  - [Contributing](#contributing)
+    - [Run tests](#run-tests)
   - [Authors and acknowledgments](#authors-and-acknowledgments)
   - [License](#license)
 
@@ -31,6 +33,14 @@ Run the script inside a project with a `package.json` in the root folder:
 
 ```sh
 python path/to/main.py
+```
+
+## Contributing
+
+### Run tests
+
+```sh
+pytest tests
 ```
 
 ## Authors and acknowledgments
