@@ -40,7 +40,7 @@ python path/to/main.py
 ### Run tests
 
 ```sh
-pytest tests
+pytest
 ```
 
 ## Authors and acknowledgments
