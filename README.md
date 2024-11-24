@@ -18,7 +18,11 @@ Update NPM dependencies
 ## Install
 
 ```sh
-pip install packaging
+git clone git@github.com:martendebruijn/npm-update.git
+
+python -m venv vevn
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -26,7 +30,6 @@ pip install packaging
 Run the script inside a project with a `package.json` in the root folder:
 
 ```sh
-cd coding-project/my-awesome-project
 python path/to/main.py
 ```
 
