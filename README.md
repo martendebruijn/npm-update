@@ -1,6 +1,6 @@
 # npm-update
 
-Update NPM dependencies
+Update NPM dependencies to newer patch and minor versions automatically.
 
 - [npm-update](#npm-update)
   - [Dependencies](#dependencies)
