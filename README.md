@@ -11,18 +11,12 @@ Update NPM dependencies
 
 ## Dependencies
 
-- Python
-- NPM
-- packaging
+- [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
 ## Install
 
 ```sh
 git clone git@github.com:martendebruijn/npm-update.git
-
-python -m venv vevn
-source venv/bin/activate
-pip install -r requirements.txt
 ```
 
 ## Usage
