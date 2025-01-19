@@ -94,7 +94,22 @@ def create_description():
     result = run_command("ncu --target minor", capture_output=True, suppress_output=False)
     lines = result.stdout.splitlines()
     filtered_lines = lines[1:-1]
-    return "\n\n".join(filtered_lines)
+    
+    table = "| Package Name           | Old Version   | New Version   |\n"
+    table += "|------------------------|---------------|---------------|\n"
+
+    for line in filtered_lines:
+        # Split the line into parts
+        parts = line.split()
+        if len(parts) >= 3:
+            package_name = parts[0]
+            old_version = parts[1]
+            new_version = parts[-1]
+            table += f"| {package_name:<23} | {old_version:<13} | {new_version:<13} |\n"
+
+    return table
+
+
 
 
 def main():
