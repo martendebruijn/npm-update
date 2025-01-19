@@ -6,6 +6,7 @@ Update NPM dependencies
   - [Dependencies](#dependencies)
   - [Install](#install)
   - [Usage](#usage)
+  - [Roadmap](#roadmap)
   - [Authors and acknowledgments](#authors-and-acknowledgments)
   - [License](#license)
 
@@ -26,6 +27,12 @@ Run the script inside a project with a `package.json` in the root folder:
 ```sh
 python path/to/main.py
 ```
+
+## Roadmap
+
+- [ ] Create pull requests on GitHub
+- [ ] Create merge request on GitLab
+- [ ] Add updated dependencies to body
 
 ## Authors and acknowledgments
 
