@@ -75,18 +75,26 @@ def upgrade_packages(type):
 
 
 def create_merge_request(title, description):
+    """Create a merge request on GitLab"""
     run_command(f'glab mr create --draft --title "{title}" --description "{description}"')
 
 def check_remote():
+    """Check the current remote"""
     result = run_command("git remote -v", capture_output=True, suppress_output=False)
     if "draft.beerntea.com" in result.stdout:
         return "beerntea"
     else:
         return False
     
-def create_pull_request(title, description):
-        print(f"Create pull request: {title}")
+def create_merge_request(title, description):
+        print(f"Create merge request: {title}")
         run_command(f'glab mr create --draft --title "{title}" --description "{description}"')
+
+def create_description():
+    result = run_command("ncu --target minor", capture_output=True, suppress_output=False)
+    lines = result.stdout.splitlines()
+    filtered_lines = lines[1:-1]
+    return "\n\n".join(filtered_lines)
 
 
 def main():
@@ -102,15 +110,17 @@ def main():
 
         print(f'👾 Create branch "{branch_name}"')
         run_command(f"git switch --create {branch_name}")
+        description = create_description()
         upgrade_packages("minor")
         print("👾 Push changes")
         run_command("git push")
+        remote = check_remote()
+        if remote == 'beerntea':
+            print("👾 Create pull request")
+            create_merge_request('NPM dependencies update', description)
         # List remaining (major) updateable packages
         print("👨‍💻 Check manually:")
         run_command("ncu", capture_output=False, suppress_output=False)
-        remote = check_remote()
-        if remote == 'beerntea':
-            create_pull_request('NPM dependencies update', 'Update NPM dependencies.')
     else:
         print("✅ All dependencies are up to date")
 
