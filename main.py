@@ -74,6 +74,21 @@ def upgrade_packages(type):
         run_command(f"git commit -m '(npm): update {type} versions'")
 
 
+def create_merge_request(title, description):
+    run_command(f'glab mr create --draft --title "{title}" --description "{description}"')
+
+def check_remote():
+    result = run_command("git remote -v", capture_output=True, suppress_output=False)
+    if "draft.beerntea.com" in result.stdout:
+        return "beerntea"
+    else:
+        return False
+    
+def create_pull_request(title, description):
+        print(f"Create pull request: {title}")
+        run_command(f'glab mr create --draft --title "{title}" --description "{description}"')
+
+
 def main():
     print("🕵️‍♂️ Checking for updates")
     if are_updates_available():
@@ -91,7 +106,11 @@ def main():
         print("👾 Push changes")
         run_command("git push")
         # List remaining (major) updateable packages
+        print("👨‍💻 Check manually:")
         run_command("ncu", capture_output=False, suppress_output=False)
+        remote = check_remote()
+        if remote == 'beerntea':
+            create_pull_request('NPM dependencies update', 'Update NPM dependencies.')
     else:
         print("✅ All dependencies are up to date")
 
