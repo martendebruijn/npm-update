@@ -88,7 +88,7 @@ def check_remote():
     
 def create_merge_request(title, description):
         print(f"Create merge request: {title}")
-        run_command(f'glab mr create --draft --title "{title}" --description "{description}" --target-branch "dev"')
+        run_command(f'glab mr create --draft --title "{title}" --description "{description}" --target-branch "dev" --assignee marten --reviewer timo')
 
 def create_description():
     result = run_command("ncu --target minor", capture_output=True, suppress_output=False)
