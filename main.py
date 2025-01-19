@@ -27,6 +27,7 @@ def run_command(command, capture_output=False, suppress_output=True):
 
 
 def are_updates_available():
+    """Check if there are any updates available"""
     result = run_command("ncu", capture_output=True, suppress_output=False)
     return (
         "No depencies." not in result.stdout
@@ -35,6 +36,7 @@ def are_updates_available():
 
 
 def does_branch_exists(branch):
+    """Check if the branch already exists"""
     result = run_command(
         f"git branch --list {branch}", capture_output=True, suppress_output=False
     )
@@ -42,6 +44,7 @@ def does_branch_exists(branch):
 
 
 def does_remote_branch_exists(branch):
+    """Check if the branch already exists on a remote"""
     result = run_command(
         "git branch --list --remotes", capture_output=True, suppress_output=False
     )
@@ -55,6 +58,7 @@ def does_remote_branch_exists(branch):
 
 
 def is_changed():
+    """Check if something has changed"""
     result = run_command(
         "git status --short", capture_output=True, suppress_output=False
     )
@@ -62,6 +66,7 @@ def is_changed():
 
 
 def upgrade_packages(type):
+    """Upgrade dependencies according to the target"""
     print(f"🆙 Upgrade {type} versions")
     run_command(f"ncu --target {type} --upgrade")
     if is_changed():
