@@ -1,4 +1,7 @@
 import subprocess
+import re
+
+branch_name = "feat-npm-updates"
 
 
 def run_command(command, capture_output=False, suppress_output=True):
@@ -35,7 +38,20 @@ def does_branch_exists(branch):
     result = run_command(
         f"git branch --list {branch}", capture_output=True, suppress_output=False
     )
-    return result.stdout != ""
+    return branch_name in result.stdout
+
+
+def does_remote_branch_exists(branch):
+    result = run_command(
+        "git branch --list --remotes", capture_output=True, suppress_output=False
+    )
+    remote_branches = result.stdout.strip().split("\n")
+    pattern = re.compile(rf".*\b{branch}\b$")
+    for remote_branch in remote_branches:
+        if pattern.search(remote_branch.strip()):
+            return True
+
+    return False
 
 
 def is_changed():
@@ -56,15 +72,21 @@ def upgrade_packages(type):
 def main():
     print("🕵️‍♂️ Checking for updates")
     if are_updates_available():
-        if not does_branch_exists("feat-npm-update"):
-            print('👾 Create branch "feat-npm-updates"')
-            run_command("git switch --create feat-npm-updates")
-            upgrade_packages("patch")
-            upgrade_packages("minor")
-            print("👾 Push changes")
-            run_command("git push")
-        else:
-            print('❗️ The branch "feat-npm-updates" already exists')
+        run_command("git fetch --prune")
+        if does_branch_exists(branch_name):
+            print(f"❗️ The branch {branch_name} already exists")
+            return
+        if does_remote_branch_exists(branch_name):
+            print(f"❗️ The branch {branch_name} already exists on a remote")
+            return
+
+        print(f'👾 Create branch "{branch_name}"')
+        run_command(f"git switch --create {branch_name}")
+        upgrade_packages("minor")
+        print("👾 Push changes")
+        run_command("git push")
+        # List remaining (major) updateable packages
+        run_command("ncu", capture_output=False, suppress_output=False)
     else:
         print("✅ All dependencies are up to date")
 
