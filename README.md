@@ -32,7 +32,7 @@ python path/to/main.py
 
 - [ ] Create pull requests on GitHub
 - [ ] Create merge request on GitLab
-- [ ] Add updated dependencies to body
+- [ ] Add details/summary to MR body
 
 ## Authors and acknowledgments
 
