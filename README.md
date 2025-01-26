@@ -2,6 +2,9 @@
 
 Update NPM dependencies to newer patch and minor versions automatically.
 
+> [!IMPORTANT]
+> This project is *very much* a work in progress. I don't have *that* much time to work on this and such this project is not finished and code may not work the way it's intended to work.
+
 - [npm-update](#npm-update)
   - [Dependencies](#dependencies)
   - [Install](#install)
