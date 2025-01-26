@@ -33,12 +33,12 @@ python path/to/main.py
 
 ## Roadmap
 
-- [ ] Create tests to test if minor and patch dependencies are succesfully upgraded
-- [ ] Run project test scripts before committing anything
-- [ ] Create a merge request on GitLab (self/work hosted)
-- [ ] Create a pull request on GitHub
-- [ ] Create a merge request on GitLab
-- [ ] Add a tabel inside a details/summary in the body of a pull/merge request
+- [ ] Create tests to test if minor and patch dependencies are succesfully upgraded [(#2)](https://github.com/martendebruijn/npm-update/issues/2)
+- [ ] Run project test scripts before committing anything [(#3)](https://github.com/martendebruijn/npm-update/issues/3)
+- [ ] Create a merge request on GitLab (self/work hosted) [(#4)](https://github.com/martendebruijn/npm-update/issues/4)
+- [ ] Create a pull request on GitHub [(#5)](https://github.com/martendebruijn/npm-update/issues/5)
+- [ ] Create a merge request on GitLab [(#6)](https://github.com/martendebruijn/npm-update/issues/6)
+- [ ] Add a tabel inside a details/summary in the body of a pull/merge request [(#7)](https://github.com/martendebruijn/npm-update/issues/7)
 
 ## Authors and acknowledgments
 
