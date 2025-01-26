@@ -73,6 +73,7 @@ def upgrade_packages(type):
         run_command("git add package*")
         run_command(f"git commit -m '(npm): update {type} versions'")
 
+
 def check_remote():
     """Check the current remote"""
     result = run_command("git remote -v", capture_output=True, suppress_output=False)
@@ -81,11 +82,14 @@ def check_remote():
     else:
         return False
 
+
 def create_description():
-    result = run_command("ncu --target minor", capture_output=True, suppress_output=False)
+    result = run_command(
+        "ncu --target minor", capture_output=True, suppress_output=False
+    )
     lines = result.stdout.splitlines()
     filtered_lines = lines[1:-1]
-    
+
     table = "| Package Name           | Old Version   | New Version   |\n"
     table += "|------------------------|---------------|---------------|\n"
 
@@ -101,6 +105,9 @@ def create_description():
     return table
 
 
+def print_error(message):
+    """Print an error message"""
+    print(f"❌ {message}")
 
 
 def main():
@@ -108,19 +115,17 @@ def main():
     if are_updates_available():
         run_command("git fetch --prune")
         if does_branch_exists(branch_name):
-            print(f"❗️ The branch {branch_name} already exists")
+            print_error(f"he branch {branch_name} already exists")
             return
         if does_remote_branch_exists(branch_name):
-            print(f"❗️ The branch {branch_name} already exists on a remote")
+            print_error(f"The branch {branch_name} already exists on a remote")
             return
 
         print(f'👾 Create branch "{branch_name}"')
         run_command(f"git switch --create {branch_name}")
-        description = create_description()
         upgrade_packages("minor")
         print("👾 Push changes")
         run_command("git push")
-        remote = check_remote()
         # List remaining (major) updateable packages
         print("👨‍💻 Check manually:")
         run_command("ncu", capture_output=False, suppress_output=False)
