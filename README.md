@@ -33,10 +33,12 @@ python path/to/main.py
 
 ## Roadmap
 
-- [ ] Create pull requests on GitHub
-- [ ] Create merge request on GitLab
-- [ ] Add details/summary to MR body
+- [ ] Create tests to test if minor and patch dependencies are succesfully upgraded
 - [ ] Run project test scripts before committing anything
+- [ ] Create a merge request on GitLab (self/work hosted)
+- [ ] Create a pull request on GitHub
+- [ ] Create a merge request on GitLab
+- [ ] Add a tabel inside a details/summary in the body of a pull/merge request
 
 ## Authors and acknowledgments
 
