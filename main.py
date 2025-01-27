@@ -27,12 +27,15 @@ def run_command(command, capture_output=False, suppress_output=True):
 
 
 def are_updates_available():
-    """Check if there are any updates available"""
-    result = run_command("ncu", capture_output=True, suppress_output=False)
-    return (
-        "No depencies." not in result.stdout
-        and "All dependencies match the latest package versions" not in result.stdout
+    """Check if there are any (not major) updates available"""
+    result = run_command(
+        "ncu --target minor", capture_output=True, suppress_output=False
     )
+    stdout = result.stdout
+    are_no_dependencies = "No dependencies." not in stdout
+    are_all_dependencies_up_to_date = "All dependencies match" not in stdout
+    are_updates_available = are_no_dependencies and are_all_dependencies_up_to_date
+    return are_updates_available
 
 
 def does_branch_exists(branch):
@@ -68,10 +71,11 @@ def is_changed():
 def upgrade_packages(type):
     """Upgrade dependencies according to the target"""
     print(f"🆙 Upgrade {type} versions")
-    run_command(f"ncu --target {type} --upgrade")
-    if is_changed():
-        run_command("git add package*")
-        run_command(f"git commit -m '(npm): update {type} versions'")
+    result = run_command(f"ncu --target {type} --upgrade")
+    if result.returncode == 0:
+        return True
+    else:
+        return False
 
 
 def check_remote():
@@ -113,22 +117,25 @@ def print_error(message):
 def main():
     print("🕵️‍♂️ Checking for updates")
     if are_updates_available():
-        run_command("git fetch --prune")
-        if does_branch_exists(branch_name):
-            print_error(f"he branch {branch_name} already exists")
-            return
-        if does_remote_branch_exists(branch_name):
-            print_error(f"The branch {branch_name} already exists on a remote")
-            return
+        # run_command("git fetch --prune")
+        # if does_branch_exists(branch_name):
+        #     print_error(f"he branch {branch_name} already exists")
+        #     return
+        # if does_remote_branch_exists(branch_name):
+        #     print_error(f"The branch {branch_name} already exists on a remote")
+        #     return
 
-        print(f'👾 Create branch "{branch_name}"')
-        run_command(f"git switch --create {branch_name}")
+        # print(f'👾 Create branch "{branch_name}"')
+        # run_command(f"git switch --create {branch_name}")
         upgrade_packages("minor")
-        print("👾 Push changes")
-        run_command("git push")
+        # if is_changed():
+        #     run_command("git add package*")
+        #     run_command(f"git commit -m '(npm): update {type} versions'")
+        # print("👾 Push changes")
+        # run_command("git push")
         # List remaining (major) updateable packages
-        print("👨‍💻 Check manually:")
-        run_command("ncu", capture_output=False, suppress_output=False)
+        # print("👨‍💻 Check manually:")
+        # run_command("ncu", capture_output=False, suppress_output=False)
     else:
         print("✅ All dependencies are up to date")
 
