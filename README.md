@@ -37,7 +37,6 @@ python path/to/main.py
 
 ## Roadmap
 
-- [ ] Create tests to test if minor and patch dependencies are succesfully upgraded [(#2)](https://github.com/martendebruijn/npm-update/issues/2) [(!8)](https://github.com/martendebruijn/npm-update/pull/8)
 - [ ] Run project test scripts before committing anything [(#3)](https://github.com/martendebruijn/npm-update/issues/3)
 - [ ] Create a merge request on GitLab (self/work hosted) [(#4)](https://github.com/martendebruijn/npm-update/issues/4)
 - [ ] Create a pull request on GitHub [(#5)](https://github.com/martendebruijn/npm-update/issues/5)
