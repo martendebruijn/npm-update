@@ -10,9 +10,9 @@ Update NPM dependencies to newer patch and minor versions automatically.
   - [Install](#install)
   - [Usage](#usage)
   - [Roadmap](#roadmap)
-  - [Authors and acknowledgments](#authors-and-acknowledgments)
   - [Contributing](#contributing)
     - [Run tests](#run-tests)
+  - [Authors and acknowledgments](#authors-and-acknowledgments)
   - [License](#license)
 
 ## Dependencies
@@ -44,12 +44,6 @@ python path/to/main.py
 - [ ] Create a merge request on GitLab [(#6)](https://github.com/martendebruijn/npm-update/issues/6)
 - [ ] Add a tabel inside a details/summary in the body of a pull/merge request [(#7)](https://github.com/martendebruijn/npm-update/issues/7)
 
-## Authors and acknowledgments
-
-- **[@martendebruijn](https://github.com/martendebruijn)** - Owner
-
-For a full list of contributors, please see the [contributors list](https://github.com/martendebruijn/types/graphs/contributors).
-
 ## Contributing
 
 Clone the repository
@@ -69,6 +63,12 @@ pip install -r requirements.txt
 ```sh
 pytest
 ```
+
+## Authors and acknowledgments
+
+- **[@martendebruijn](https://github.com/martendebruijn)** - Owner
+
+For a full list of contributors, please see the [contributors list](https://github.com/martendebruijn/types/graphs/contributors).
 
 ## License
 
