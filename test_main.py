@@ -118,4 +118,36 @@ def test_upgrade_packages_minor(tmp_path):
 
 
 # Test if major versions will not be updated
+def test_upgrade_packages_major(tmp_path):
+    """Test upgrade_packages with major versions"""
+    package_json_path = tmp_path / "package.json"
+    package_json_content = {
+        "name": "test-package",
+        "version": "1.0.0",
+        "dependencies": {"@martendebruijn/types": "0.0.17"},
+    }
+    with open(package_json_path, "w") as f:
+        json.dump(package_json_content, f, indent=4)
+
+    current_dir = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        upgrade_successful = upgrade_packages("minor")
+    finally:
+        os.chdir(current_dir)
+
+    assert upgrade_successful is True
+
+    with open(package_json_path) as f:
+        updated_package_json_content = json.load(f)
+
+    assert (
+        updated_package_json_content["dependencies"]["@martendebruijn/types"] != "1.0.0"
+    )
+    assert (
+        updated_package_json_content["dependencies"]["@martendebruijn/types"]
+        == "0.0.17"
+    )
+
+
 # Test if package.json is untracked
