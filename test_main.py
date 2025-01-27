@@ -45,11 +45,48 @@ def test_are_updates_available(tmp_path):
     assert updates_available is True
 
 
-# Todo:
-# are_updates_available:
-# Test when there are no dependencies
-# Test when all dependencies are already up to date
-# Test when ncu is not installed
+def test_are_updates_available_no_dependencies(tmp_path):
+    """Test are_updates_available when there are no dependencies"""
+    package_json_path = tmp_path / "package.json"
+    package_json_content = {
+        "name": "test-package",
+        "version": "1.0.0",
+    }
+    with open(package_json_path, "w") as f:
+        json.dump(package_json_content, f, indent=4)
+
+    current_dir = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        updates_available = are_updates_available()
+    finally:
+        os.chdir(current_dir)
+
+    assert updates_available is False
+
+
+def test_are_updates_available_all_dependencies_up_to_date(tmp_path):
+    """Test are_updates_available if all dependencies are up to date"""
+    package_json_path = tmp_path / "package.json"
+    package_json_content = {
+        "name": "test-package",
+        "version": "1.0.0",
+        "dependencies": {"@martendebruijn/types": "1.4.0"},
+    }
+    with open(package_json_path, "w") as f:
+        json.dump(package_json_content, f, indent=4)
+
+    current_dir = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        updates_available = are_updates_available()
+    finally:
+        os.chdir(current_dir)
+
+    assert updates_available is False
+
+
+# Todo: Test when ncu is not installed
 
 
 def test_upgrade_packages_patch(tmp_path):
