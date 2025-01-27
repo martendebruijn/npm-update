@@ -52,10 +52,8 @@ def test_are_updates_available(tmp_path):
 # Test when ncu is not installed
 
 
-# upgrade_packages:
-# Test if patch versions will be updated
 def test_upgrade_packages_patch(tmp_path):
-    """Test upgrade_packages with patch versions"""
+    """Test if upgrade_packages will upgrade to patch versions"""
     package_json_path = tmp_path / "package.json"
     package_json_content = {
         "name": "test-package",
@@ -85,9 +83,8 @@ def test_upgrade_packages_patch(tmp_path):
     )
 
 
-# Test if minor versions will be updatedd
 def test_upgrade_packages_minor(tmp_path):
-    """Test upgrade_packages with minor versions"""
+    """Test if upgrade_packages will upgrade to minor versions"""
     package_json_path = tmp_path / "package.json"
     package_json_content = {
         "name": "test-package",
@@ -117,9 +114,8 @@ def test_upgrade_packages_minor(tmp_path):
     )
 
 
-# Test if major versions will not be updated
 def test_upgrade_packages_major(tmp_path):
-    """Test upgrade_packages with major versions"""
+    """Test if upgrade_packages will not upgrade to major versions"""
     package_json_path = tmp_path / "package.json"
     package_json_content = {
         "name": "test-package",
@@ -148,6 +144,3 @@ def test_upgrade_packages_major(tmp_path):
         updated_package_json_content["dependencies"]["@martendebruijn/types"]
         == "0.0.17"
     )
-
-
-# Test if package.json is untracked
