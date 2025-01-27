@@ -80,6 +80,9 @@ def test_upgrade_packages_patch(tmp_path):
     assert (
         updated_package_json_content["dependencies"]["@martendebruijn/types"] != "2.0.1"
     )
+    assert (
+        updated_package_json_content["dependencies"]["@martendebruijn/types"] == "2.0.2"
+    )
 
 
 # Test if minor versions will be updatedd
@@ -108,6 +111,9 @@ def test_upgrade_packages_minor(tmp_path):
 
     assert (
         updated_package_json_content["dependencies"]["@martendebruijn/types"] != "1.0.0"
+    )
+    assert (
+        updated_package_json_content["dependencies"]["@martendebruijn/types"] == "1.4.0"
     )
 
 
